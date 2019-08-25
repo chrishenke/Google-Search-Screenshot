@@ -1,0 +1,23 @@
+{
+  "name": "google-search-screenshot",
+  "version": "0.0.1",
+  "description": "Tool to take screenshots of Google search results page.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrishenke/Google-Search-Screenshot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrishenke/Google-Search-Screenshot/issues"
+  },
+  "homepage": "https://github.com/chrishenke/Google-Search-Screenshot#readme",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "puppeteer": "^1.19.0"
+  }
+}
