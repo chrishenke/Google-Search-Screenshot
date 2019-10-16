@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 const moment = require("moment");
+const iPhone = puppeteer.devices["iPhone 6"];
 const cities = [
 	{
 		city: "San Angelo",
@@ -31,17 +32,27 @@ const cities = [
 	}
 ];
 
-async function getScreenshot(url, query, city) {
+async function getScreenshot(url, query, city, directory = "screenshots") {
 	const date = new Date();
-	const filepath =
-		"screenshots/" +
+	const desktopFilename =
+		directory +
+		"/" +
 		moment(date).format("YYYY-MM-DD") +
 		"-" +
 		query +
 		"-" +
 		city.city +
-		".png";
-	const browser = await puppeteer.launch({ headless: false, slowMo: 200 });
+		"-desktop.png";
+	const mobileFilename =
+		directory +
+		"/" +
+		moment(date).format("YYYY-MM-DD") +
+		"-" +
+		query +
+		"-" +
+		city.city +
+		"-mobile.png";
+	const browser = await puppeteer.launch();
 
 	// Grants permission for changing geolocation
 	const context = browser.defaultBrowserContext();
@@ -54,16 +65,28 @@ async function getScreenshot(url, query, city) {
 	await page.setGeolocation({ latitude: city.lat, longitude: city.long });
 	await page.goto(url);
 
-	await page.focus('input[name = "q"]');
+	await page.focus('input[name="q"]');
 	await page.keyboard.type(query);
 	await page.keyboard.press("Enter");
-	await page.waitForSelector("title");
+	await page.waitForSelector("#nav");
 
-	await page.focus('input[name = "q"]');
+	await page.focus('input[name="q"]');
 	await page.keyboard.press("Enter");
-	await page.waitForSelector("title");
+	await page.waitForSelector("#nav");
 
-	await page.screenshot({ path: filepath.replace(" ", "-"), fullPage: true });
+	await page.screenshot({
+		path: desktopFilename.replace(" ", "-"),
+		fullPage: true
+	});
+
+	await page.emulate(iPhone);
+	await page.reload();
+
+	await page.screenshot({
+		path: mobileFilename.replace(" ", "-"),
+		fullPage: true
+	});
+
 	await browser.close();
 }
 
