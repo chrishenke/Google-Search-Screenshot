@@ -18,6 +18,6 @@
   "homepage": "https://github.com/chrishenke/Google-Search-Screenshot#readme",
   "dependencies": {
     "moment": "^2.24.0",
-    "puppeteer": "^1.19.0"
+    "puppeteer": "^1.20.0"
   }
 }
