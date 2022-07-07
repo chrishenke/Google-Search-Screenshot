@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/chrishenke/Google-Search-Screenshot#readme",
   "dependencies": {
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "puppeteer": "^1.20.0"
   }
 }
